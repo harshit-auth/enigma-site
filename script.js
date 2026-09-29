@@ -1,210 +1,241 @@
-const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+/* =========================================================
+   ENIGMA // FRONTEND CONTROLLER
+   ========================================================= */
 
-// ---------- Load events from the backend ----------
-fetch("/api/events")
-  .then((res) => res.json())
-  .then((events) => {
-    const list = document.getElementById("events-list");
-    list.innerHTML = "";
-    events.forEach((e) => {
-      const card = document.createElement("div");
-      card.className = "card";
-      card.innerHTML = `<h3>${e.title}</h3><p class="event-date">&gt; ${e.date}</p>`;
-      list.appendChild(card);
-    });
-  })
-  .catch(() => {
-    document.getElementById("events-list").innerHTML =
-      '<p class="muted">Could not load events right now.</p>';
-  });
 
-// ---------- Contact form ----------
-const form = document.getElementById("contact-form");
-const status = document.getElementById("form-status");
+/* =========================
+   01. LOAD EVENTS
+   ========================= */
 
-form.addEventListener("submit", async (e) => {
-  e.preventDefault();
-  status.className = "status";
-  status.textContent = "Sending...";
+async function loadEvents() {
+  const list = document.getElementById("events-list");
+
+  if (!list) return;
 
   try {
-    const res = await fetch("/api/contact", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        name: document.getElementById("name").value,
-        email: document.getElementById("email").value,
-        message: document.getElementById("message").value,
-      }),
+    const response = await fetch("/api/events");
+
+    if (!response.ok) {
+      throw new Error("Failed to load events");
+    }
+
+    const events = await response.json();
+
+    list.innerHTML = "";
+
+    if (!Array.isArray(events) || events.length === 0) {
+      list.innerHTML = `
+        <div class="loading-state">
+          NO ACTIVE MISSIONS FOUND.
+        </div>
+      `;
+      return;
+    }
+
+    events.forEach((event) => {
+      const card = document.createElement("article");
+
+      card.className = "card";
+
+      card.innerHTML = `
+        <div>
+          <h3>${escapeHTML(event.title)}</h3>
+          <p class="event-date">&gt; ${escapeHTML(event.date)}</p>
+        </div>
+      `;
+
+      list.appendChild(card);
     });
 
-    if (res.ok) {
-      status.textContent = "Thanks! Your message has been sent.";
-      status.className = "status ok";
-      form.reset();
-    } else {
-      status.textContent = "Please fill in all fields.";
-      status.className = "status err";
-    }
-  } catch {
-    status.textContent = "Something went wrong. Try again.";
-    status.className = "status err";
-  }
-});
+  } catch (error) {
+    console.error("Event loading error:", error);
 
-// ---------- Scroll reveal ----------
+    list.innerHTML = `
+      <div class="loading-state">
+        UNABLE TO CONNECT TO MISSION.LOG
+      </div>
+    `;
+  }
+}
+
+
+/* =========================
+   02. BASIC HTML ESCAPING
+   ========================= */
+
+function escapeHTML(value) {
+  const div = document.createElement("div");
+  div.textContent = value ?? "";
+  return div.innerHTML;
+}
+
+
+/* =========================
+   03. CONTACT FORM
+   ========================= */
+
+const contactForm = document.getElementById("contact-form");
+const formStatus = document.getElementById("form-status");
+
+if (contactForm) {
+
+  contactForm.addEventListener("submit", async (event) => {
+
+    event.preventDefault();
+
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const message = document.getElementById("message").value.trim();
+
+    if (!name || !email || !message) {
+      formStatus.textContent = "ERROR // ALL FIELDS ARE REQUIRED.";
+      return;
+    }
+
+    formStatus.textContent = "TRANSMITTING...";
+
+    try {
+
+      const response = await fetch("/api/contact", {
+        method: "POST",
+
+        headers: {
+          "Content-Type": "application/json"
+        },
+
+        body: JSON.stringify({
+          name,
+          email,
+          message
+        })
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Transmission failed");
+      }
+
+      formStatus.textContent =
+        "TRANSMISSION RECEIVED // CHANNEL SECURE.";
+
+      contactForm.reset();
+
+    } catch (error) {
+
+      console.error("Contact form error:", error);
+
+      formStatus.textContent =
+        "ERROR // TRANSMISSION FAILED.";
+    }
+
+  });
+
+}
+
+
+/* =========================
+   04. SCROLL REVEAL
+   ========================= */
+
+const revealElements = document.querySelectorAll(".reveal");
+
 const revealObserver = new IntersectionObserver(
-  (entries) => entries.forEach((en) => en.isIntersecting && en.target.classList.add("visible")),
-  { threshold: 0.15 }
-);
-document.querySelectorAll(".reveal").forEach((el) => revealObserver.observe(el));
-
-// ---------- Active nav link ----------
-const navLinks = document.querySelectorAll("#nav a");
-const sectionObserver = new IntersectionObserver(
   (entries) => {
-    entries.forEach((en) => {
-      if (en.isIntersecting) {
-        navLinks.forEach((a) => a.classList.toggle("active", a.getAttribute("href") === "#" + en.target.id));
+
+    entries.forEach((entry) => {
+
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+        revealObserver.unobserve(entry.target);
       }
+
     });
+
   },
-  { rootMargin: "-40% 0px -50% 0px" }
+  {
+    threshold: 0.12
+  }
 );
-document.querySelectorAll("section[id]").forEach((s) => sectionObserver.observe(s));
 
-// ---------- Scroll progress bar ----------
+revealElements.forEach((element) => {
+  revealObserver.observe(element);
+});
+
+
+/* =========================
+   05. ACTIVE NAVIGATION
+   ========================= */
+
+const sections = document.querySelectorAll("main section[id]");
+const navLinks = document.querySelectorAll(".navbar nav a");
+
+const navObserver = new IntersectionObserver(
+  (entries) => {
+
+    entries.forEach((entry) => {
+
+      if (!entry.isIntersecting) return;
+
+      const id = entry.target.id;
+
+      navLinks.forEach((link) => {
+        link.classList.remove("active");
+
+        if (link.getAttribute("href") === `#${id}`) {
+          link.classList.add("active");
+        }
+      });
+
+    });
+
+  },
+  {
+    rootMargin: "-35% 0px -55% 0px"
+  }
+);
+
+sections.forEach((section) => {
+  navObserver.observe(section);
+});
+
+
+/* =========================
+   06. SCROLL PROGRESS
+   ========================= */
+
 const progress = document.getElementById("progress");
-window.addEventListener("scroll", () => {
-  const max = document.documentElement.scrollHeight - window.innerHeight;
-  progress.style.width = (max > 0 ? (window.scrollY / max) * 100 : 0) + "%";
-});
 
-// ---------- Typing effect ----------
-const phrases = [
-  "build things that matter",
-  "learn by doing",
-  "break it, fix it, ship it",
-  "solve problems together",
-];
-const typedEl = document.getElementById("typed");
-let pi = 0, ci = 0, deleting = false;
+function updateProgress() {
 
-function typeLoop() {
-  const word = phrases[pi];
-  typedEl.textContent = word.slice(0, ci);
+  if (!progress) return;
 
-  if (!deleting && ci < word.length) {
-    ci++;
-    setTimeout(typeLoop, 70);
-  } else if (!deleting) {
-    deleting = true;
-    setTimeout(typeLoop, 1400);
-  } else if (ci > 0) {
-    ci--;
-    setTimeout(typeLoop, 35);
-  } else {
-    deleting = false;
-    pi = (pi + 1) % phrases.length;
-    setTimeout(typeLoop, 300);
+  const scrollTop = window.scrollY;
+
+  const documentHeight =
+    document.documentElement.scrollHeight -
+    document.documentElement.clientHeight;
+
+  if (documentHeight <= 0) {
+    progress.style.width = "0%";
+    return;
   }
-}
-if (reduceMotion) typedEl.textContent = phrases[0];
-else typeLoop();
 
-// ---------- Mouse: cursor glow + card tilt ----------
-const glow = document.getElementById("cursor-glow");
-const mouse = { x: null, y: null };
-let lastCard = null;
+  const percentage =
+    (scrollTop / documentHeight) * 100;
 
-document.addEventListener("mousemove", (e) => {
-  mouse.x = e.clientX;
-  mouse.y = e.clientY;
-  glow.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
-
-  const card = e.target.closest ? e.target.closest(".card") : null;
-  if (lastCard && lastCard !== card) lastCard.style.transform = "";
-
-  if (card) {
-    const r = card.getBoundingClientRect();
-    const x = e.clientX - r.left;
-    const y = e.clientY - r.top;
-    card.style.setProperty("--mx", x + "px");
-    card.style.setProperty("--my", y + "px");
-    if (!reduceMotion) {
-      const rx = (y / r.height - 0.5) * -10;
-      const ry = (x / r.width - 0.5) * 10;
-      card.style.transform = `perspective(800px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-4px)`;
-    }
-  }
-  lastCard = card;
-});
-
-document.addEventListener("mouseleave", () => {
-  mouse.x = null;
-  mouse.y = null;
-  if (lastCard) lastCard.style.transform = "";
-});
-
-// ---------- Particle network background ----------
-const canvas = document.getElementById("bg");
-const ctx = canvas.getContext("2d");
-let w, h, particles = [];
-
-function initParticles() {
-  w = canvas.width = window.innerWidth;
-  h = canvas.height = window.innerHeight;
-  const count = Math.min(90, Math.floor((w * h) / 16000));
-  particles = Array.from({ length: count }, () => ({
-    x: Math.random() * w,
-    y: Math.random() * h,
-    vx: (Math.random() - 0.5) * 0.5,
-    vy: (Math.random() - 0.5) * 0.5,
-  }));
+  progress.style.width = `${percentage}%`;
 }
 
-function drawParticles() {
-  ctx.clearRect(0, 0, w, h);
+window.addEventListener("scroll", updateProgress, {
+  passive: true
+});
 
-  for (let i = 0; i < particles.length; i++) {
-    const p = particles[i];
-    p.x += p.vx;
-    p.y += p.vy;
-    if (p.x < 0 || p.x > w) p.vx *= -1;
-    if (p.y < 0 || p.y > h) p.vy *= -1;
+updateProgress();
 
-    ctx.beginPath();
-    ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
-    ctx.fillStyle = "rgba(56, 189, 248, 0.8)";
-    ctx.fill();
 
-    for (let j = i + 1; j < particles.length; j++) {
-      const q = particles[j];
-      const d = Math.hypot(p.x - q.x, p.y - q.y);
-      if (d < 120) {
-        ctx.strokeStyle = `rgba(167, 139, 250, ${0.35 * (1 - d / 120)})`;
-        ctx.lineWidth = 1;
-        ctx.beginPath();
-        ctx.moveTo(p.x, p.y);
-        ctx.lineTo(q.x, q.y);
-        ctx.stroke();
-      }
-    }
+/* =========================
+   07. START APPLICATION
+   ========================= */
 
-    if (mouse.x !== null) {
-      const d = Math.hypot(p.x - mouse.x, p.y - mouse.y);
-      if (d < 160) {
-        ctx.strokeStyle = `rgba(56, 189, 248, ${0.6 * (1 - d / 160)})`;
-        ctx.beginPath();
-        ctx.moveTo(p.x, p.y);
-        ctx.lineTo(mouse.x, mouse.y);
-        ctx.stroke();
-      }
-    }
-  }
-  requestAnimationFrame(drawParticles);
-}
-
-initParticles();
-window.addEventListener("resize", initParticles);
-if (!reduceMotion) drawParticles();
+loadEvents();
