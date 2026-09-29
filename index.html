@@ -3,13 +3,71 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Enigma Club</title>
+  <title>Enigma | Unraveling Technology, Innovation & Creativity</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Enigma</h1>
-  <p>Site is live.</p>
-  <ul id="events"></ul>
+
+  <header class="navbar">
+    <a href="#home" class="logo">ENIGMA<span>.</span></a>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#events">Events</a>
+      <a href="#team">Team</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section id="home" class="hero">
+    <p class="tag">Student Tech Club</p>
+    <h1>Unraveling <span class="glow">Technology</span>,<br>Innovation &amp; Creativity</h1>
+    <p class="sub">A community of curious students who learn by building, sharing, and solving problems together.</p>
+    <a href="#contact" class="btn">Get in touch</a>
+  </section>
+
+  <section id="about" class="section reveal">
+    <h2>About <span class="glow">Us</span></h2>
+    <div class="cards three">
+      <div class="card"><h3>Learn</h3><p>Workshops and sessions that take you from basics to building real things.</p></div>
+      <div class="card"><h3>Build</h3><p>Hands-on projects and hackathons where ideas turn into working products.</p></div>
+      <div class="card"><h3>Collaborate</h3><p>A peer community where everyone gets to contribute and grow.</p></div>
+    </div>
+  </section>
+
+  <section id="events" class="section reveal">
+    <h2>Upcoming <span class="glow">Events</span></h2>
+    <div id="events-list" class="cards two">
+      <p class="muted">Loading events...</p>
+    </div>
+  </section>
+
+  <section id="team" class="section reveal">
+    <h2>Meet the <span class="glow">Team</span></h2>
+    <div class="cards four">
+      <div class="card person"><div class="avatar">A</div><h3>Name Surname</h3><p>President</p></div>
+      <div class="card person"><div class="avatar">B</div><h3>Name Surname</h3><p>Tech Lead</p></div>
+      <div class="card person"><div class="avatar">C</div><h3>Name Surname</h3><p>Design Lead</p></div>
+      <div class="card person"><div class="avatar">D</div><h3>Name Surname</h3><p>Events Lead</p></div>
+    </div>
+  </section>
+
+  <section id="contact" class="section reveal">
+    <h2>Contact <span class="glow">Us</span></h2>
+    <form id="contact-form" class="form">
+      <input type="text" id="name" placeholder="Your name" required>
+      <input type="email" id="email" placeholder="Your email" required>
+      <textarea id="message" rows="5" placeholder="Your message" required></textarea>
+      <button type="submit" class="btn">Send message</button>
+      <p id="form-status" class="status"></p>
+    </form>
+  </section>
+
+  <footer>
+    <p>&copy; 2026 Enigma Club. All rights reserved.</p>
+  </footer>
+
   <script src="script.js"></script>
 </body>
 </html>
