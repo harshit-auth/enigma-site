@@ -3,90 +3,816 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Enigma | Unraveling Technology, Innovation & Creativity</title>
+
+  <title>ENIGMA // Decode the Unknown</title>
+
+  <meta
+    name="description"
+    content="ENIGMA — a student-led collective of developers, designers and innovators."
+  >
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet"
+  >
+
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-  <canvas id="bg"></canvas>
-  <div class="cursor-glow" id="cursor-glow"></div>
+  <!-- Background -->
+  <div class="noise"></div>
+  <div class="grid-bg"></div>
+
+  <!-- Scroll progress -->
   <div class="progress" id="progress"></div>
 
+  <!-- Navigation -->
   <header class="navbar">
-    <a href="#home" class="logo">&lt;ENIGMA<span>/&gt;</span></a>
+
+    <a href="#home" class="logo">
+      ENIGMA<span>//</span>
+    </a>
+
     <nav id="nav">
-      <a href="#about">About</a>
-      <a href="#events">Events</a>
-      <a href="#team">Team</a>
-      <a href="#contact">Contact</a>
+      <a href="#about">01 / Decode</a>
+      <a href="#missions">02 / Missions</a>
+      <a href="#team">03 / Operatives</a>
+      <a href="#vision">04 / Vision</a>
+      <a href="#contact">05 / Uplink</a>
     </nav>
+
+    <div class="nav-status">
+      <span></span>
+      SYSTEM ONLINE
+    </div>
+
   </header>
 
-  <section id="home" class="hero">
-    <p class="tag">// student tech club</p>
-    <h1>Unraveling <span class="glow">Technology</span>,<br>Innovation &amp; Creativity</h1>
-    <p class="typing"><span class="prompt">&gt;</span> <span id="typed"></span><span class="caret"></span></p>
-    <div class="hero-btns">
-      <a href="#events" class="btn">Explore events</a>
-      <a href="#contact" class="btn ghost">Get in touch</a>
-    </div>
-  </section>
 
-  <section id="about" class="section reveal">
-    <h2>About <span class="glow">Us</span></h2>
+  <!-- ==================== HERO ==================== -->
 
-    <div class="terminal">
-      <div class="term-bar"><i></i><i></i><i></i><span>enigma@club:~</span></div>
-      <div class="term-body">
-        <p><span class="g">$</span> whoami</p>
-        <p class="out">A student-led tech club of curious builders.</p>
-        <p><span class="g">$</span> cat mission.txt</p>
-        <p class="out">Learn together. Build real things. Share what we know.</p>
-        <p><span class="g">$</span> <span class="caret"></span></p>
+  <main>
+
+    <section id="home" class="hero">
+
+      <div class="hero-meta">
+        <span>SECTOR.ALPHA</span>
+        <span>ENCRYPTION // ACTIVE</span>
       </div>
-    </div>
 
-    <div class="cards three">
-      <div class="card"><h3>&lt;Learn /&gt;</h3><p>Workshops and sessions that take you from basics to building real things.</p></div>
-      <div class="card"><h3>&lt;Build /&gt;</h3><p>Hands-on projects and hackathons where ideas turn into working products.</p></div>
-      <div class="card"><h3>&lt;Collaborate /&gt;</h3><p>A peer community where everyone gets to contribute and grow.</p></div>
-    </div>
-  </section>
+      <div class="hero-content">
 
-  <section id="events" class="section reveal">
-    <h2>Upcoming <span class="glow">Events</span></h2>
-    <div id="events-list" class="cards two">
-      <p class="muted">Loading events...</p>
-    </div>
-  </section>
+        <p class="eyebrow">TECHNICAL REBELLION</p>
 
-  <section id="team" class="section reveal">
-    <h2>Meet the <span class="glow">Team</span></h2>
-    <div class="cards four">
-      <div class="card person"><div class="avatar">A</div><h3>Name Surname</h3><p>President</p></div>
-      <div class="card person"><div class="avatar">B</div><h3>Name Surname</h3><p>Tech Lead</p></div>
-      <div class="card person"><div class="avatar">C</div><h3>Name Surname</h3><p>Design Lead</p></div>
-      <div class="card person"><div class="avatar">D</div><h3>Name Surname</h3><p>Events Lead</p></div>
-    </div>
-  </section>
+        <h1>
+          SOLVE THE
+          <span>UNKNOWN.</span>
+        </h1>
 
-  <section id="contact" class="section reveal">
-    <h2>Contact <span class="glow">Us</span></h2>
-    <form id="contact-form" class="form">
-      <input type="text" id="name" placeholder="Your name" required>
-      <input type="email" id="email" placeholder="Your email" required>
-      <textarea id="message" rows="5" placeholder="Your message" required></textarea>
-      <button type="submit" class="btn">Send message</button>
-      <p id="form-status" class="status"></p>
-    </form>
-  </section>
+        <p class="hero-description">
+          A collective of developers, designers and innovators
+          unraveling the mysteries of technology through
+          creative destruction.
+        </p>
+
+        <div class="hero-actions">
+
+          <a href="#missions" class="btn primary">
+            Explore Missions
+            <span>↗</span>
+          </a>
+
+          <a href="#about" class="btn secondary">
+            Decode Enigma
+            <span>↓</span>
+          </a>
+
+        </div>
+
+      </div>
+
+      <div class="hero-system">
+
+        <div>
+          <span>STATUS</span>
+          <strong>ONLINE</strong>
+        </div>
+
+        <div>
+          <span>ORIGIN</span>
+          <strong>2025</strong>
+        </div>
+
+        <div>
+          <span>SECTOR</span>
+          <strong>JAIN UNIVERSITY</strong>
+        </div>
+
+        <div>
+          <span>PROTOCOL</span>
+          <strong>ENCRYPTED</strong>
+        </div>
+
+      </div>
+
+      <div class="hero-index">01</div>
+
+    </section>
+
+
+    <!-- ==================== ABOUT ==================== -->
+
+    <section id="about" class="section about reveal">
+
+      <div class="section-header">
+
+        <div class="section-number">01</div>
+
+        <div>
+          <p class="section-label">DECODE</p>
+          <h2>ABOUT <span>ENIGMA.</span></h2>
+        </div>
+
+      </div>
+
+      <div class="about-layout">
+
+        <div class="about-main">
+
+          <p class="large-text">
+            ENIGMA is a collective of student innovators
+            dedicated to <span>technical excellence</span>
+            and creative destruction.
+          </p>
+
+          <p>
+            We believe in creating an environment where
+            high-intensity technology meets radical creativity,
+            empowering the next generation of builders.
+          </p>
+
+        </div>
+
+        <div class="manifesto">
+
+          <div class="manifesto-header">
+            <span>SYSTEM_MANIFESTO</span>
+            <span>01</span>
+          </div>
+
+          <p>
+            We learn. We build. We experiment.
+            We push technology beyond the obvious.
+          </p>
+
+          <div class="manifesto-line"></div>
+
+          <span class="manifesto-status">
+            [ CORE DIRECTIVE // ACTIVE ]
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="values-grid">
+
+        <article class="value-card">
+
+          <span class="value-number">01</span>
+
+          <div>
+            <p class="value-label">TECH INNOVATION</p>
+
+            <h3>BUILD BEYOND.</h3>
+
+            <p>
+              Fostering creative solutions and cutting-edge
+              technological advancement in a raw technical environment.
+            </p>
+          </div>
+
+        </article>
+
+
+        <article class="value-card">
+
+          <span class="value-number">02</span>
+
+          <div>
+            <p class="value-label">CORE COMMUNITY</p>
+
+            <h3>BUILD TOGETHER.</h3>
+
+            <p>
+              Building a collaborative network of passionate
+              tech enthusiasts and technical rebels.
+            </p>
+          </div>
+
+        </article>
+
+
+        <article class="value-card">
+
+          <span class="value-number">03</span>
+
+          <div>
+            <p class="value-label">MISSION EXCELLENCE</p>
+
+            <h3>MASTER THE CRAFT.</h3>
+
+            <p>
+              Striving for technical mastery and professional
+              development through rigorous missions.
+            </p>
+          </div>
+
+        </article>
+
+      </div>
+
+    </section>
+
+
+    <!-- ==================== MISSIONS ==================== -->
+
+    <section id="missions" class="section missions reveal">
+
+      <div class="section-header">
+
+        <div class="section-number">02</div>
+
+        <div>
+          <p class="section-label">DEPLOYMENTS</p>
+          <h2>ACTIVE <span>MISSIONS.</span></h2>
+        </div>
+
+      </div>
+
+      <div class="mission-intro">
+
+        <p>
+          New frontiers waiting to be explored.
+        </p>
+
+        <span>MISSION.LOG // 2026</span>
+
+      </div>
+
+
+      <!-- Events loaded from Python backend -->
+      <div id="events-list" class="missions-list">
+
+        <div class="loading-state">
+          <span class="loading-dot"></span>
+          CONNECTING TO MISSION.LOG...
+        </div>
+
+      </div>
+
+
+      <div class="mission-archive">
+
+        <div class="archive-header">
+          <span>MISSION ARCHIVE</span>
+          <span>COMPLETED OPERATIONS</span>
+        </div>
+
+        <div class="archive-item">
+
+          <div>
+            <span class="archive-code">ARCHIVE_02</span>
+            <h3>RACE FOR ROLES 2026</h3>
+          </div>
+
+          <span class="archive-status">COMPLETE</span>
+
+        </div>
+
+
+        <div class="archive-item">
+
+          <div>
+            <span class="archive-code">ARCHIVE_01</span>
+            <h3>INNOVATION DUEL 2025</h3>
+          </div>
+
+          <span class="archive-status">COMPLETE</span>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ==================== TEAM ==================== -->
+
+    <section id="team" class="section team reveal">
+
+      <div class="section-header">
+
+        <div class="section-number">03</div>
+
+        <div>
+          <p class="section-label">OPERATIVES</p>
+          <h2>THE CORE <span>UNIT.</span></h2>
+        </div>
+
+      </div>
+
+      <div class="team-intro">
+
+        <p>
+          The people responsible for technical rebellion
+          and the deployment of innovative solutions.
+        </p>
+
+        <span>08 OPERATIVES // ACTIVE</span>
+
+      </div>
+
+
+      <div class="team-grid">
+
+
+        <!-- OP 101 -->
+
+        <article class="team-card">
+
+          <div class="team-image">
+            <img
+              src="images/team/lead.jpeg"
+              alt="Enigma Lead"
+              loading="lazy"
+            >
+
+            <span class="operative-id">OP_101</span>
+          </div>
+
+          <div class="team-info">
+
+            <div>
+              <p class="team-role">LEAD</p>
+              <h3>YAMUNA SHARMA D</h3>
+            </div>
+
+            <span class="team-arrow">↗</span>
+
+          </div>
+
+          <p class="team-bio">
+            Always drawn to art and creativity, finding stories
+            in colors, design and the little details that often
+            go unnoticed.
+          </p>
+
+        </article>
+
+
+        <!-- OP 102 -->
+
+        <article class="team-card">
+
+          <div class="team-image">
+            <img
+              src="images/team/colead.jpg"
+              alt="Enigma Co-Lead"
+              loading="lazy"
+            >
+
+            <span class="operative-id">OP_102</span>
+          </div>
+
+          <div class="team-info">
+
+            <div>
+              <p class="team-role">CO-LEAD</p>
+              <h3>KSHITIJ SHARMA</h3>
+            </div>
+
+            <span class="team-arrow">↗</span>
+
+          </div>
+
+          <p class="team-bio">
+            A curious jack of all trades who loves learning,
+            building and exploring new skills across domains.
+          </p>
+
+        </article>
+
+
+        <!-- OP 103 -->
+
+        <article class="team-card">
+
+          <div class="team-image">
+            <img
+              src="images/team/tech.jpeg"
+              alt="Enigma Technical Lead"
+              loading="lazy"
+            >
+
+            <span class="operative-id">OP_103</span>
+          </div>
+
+          <div class="team-info">
+
+            <div>
+              <p class="team-role">TECHNICAL LEAD</p>
+              <h3>KRISHAL KARNA</h3>
+            </div>
+
+            <span class="team-arrow">↗</span>
+
+          </div>
+
+          <p class="team-bio">
+            Turning data into decisions — one model at a time.
+          </p>
+
+        </article>
+
+
+        <!-- OP 104 -->
+
+        <article class="team-card">
+
+          <div class="team-image">
+            <img
+              src="images/team/operation.jpeg"
+              alt="Enigma Operation Lead"
+              loading="lazy"
+            >
+
+            <span class="operative-id">OP_104</span>
+          </div>
+
+          <div class="team-info">
+
+            <div>
+              <p class="team-role">OPERATION LEAD</p>
+              <h3>SHAILI SRIVASTAVA</h3>
+            </div>
+
+            <span class="team-arrow">↗</span>
+
+          </div>
+
+          <p class="team-bio">
+            Passionate about technology and problem-solving,
+            building efficient systems and optimizing workflows.
+          </p>
+
+        </article>
+
+
+        <!-- OP 105 -->
+
+        <article class="team-card">
+
+          <div class="team-image">
+            <img
+              src="images/team/resource.jpeg"
+              alt="Enigma Resource Lead"
+              loading="lazy"
+            >
+
+            <span class="operative-id">OP_105</span>
+          </div>
+
+          <div class="team-info">
+
+            <div>
+              <p class="team-role">RESOURCE LEAD</p>
+              <h3>AAKASH AGARWAL</h3>
+            </div>
+
+            <span class="team-arrow">↗</span>
+
+          </div>
+
+          <p class="team-bio">
+            Passionate technologist solving real-world challenges.
+          </p>
+
+        </article>
+
+
+        <!-- OP 106 -->
+
+        <article class="team-card">
+
+          <div class="team-image">
+            <img
+              src="images/team/creative.jpeg"
+              alt="Enigma Creative Lead"
+              loading="lazy"
+            >
+
+            <span class="operative-id">OP_106</span>
+          </div>
+
+          <div class="team-info">
+
+            <div>
+              <p class="team-role">CREATIVE LEAD</p>
+              <h3>AYADEE APHIWATAMORN</h3>
+            </div>
+
+            <span class="team-arrow">↗</span>
+
+          </div>
+
+          <p class="team-bio">
+            Creativity isn't just what I do — it's how I see
+            the world. Turning ideas into something visual,
+            meaningful and uniquely mine.
+          </p>
+
+        </article>
+
+
+        <!-- OP 107 -->
+
+        <article class="team-card">
+
+          <div class="team-image">
+            <img
+              src="images/team/photography.jpeg"
+              alt="Enigma Photography Lead"
+              loading="lazy"
+            >
+
+            <span class="operative-id">OP_107</span>
+          </div>
+
+          <div class="team-info">
+
+            <div>
+              <p class="team-role">PHOTOGRAPHY LEAD</p>
+              <h3>SUYOG LAL SHRESTHA</h3>
+            </div>
+
+            <span class="team-arrow">↗</span>
+
+          </div>
+
+          <p class="team-bio">
+            Eager and enthusiastic about exploring new things.
+          </p>
+
+        </article>
+
+
+        <!-- OP 108 -->
+
+        <article class="team-card">
+
+          <div class="team-image">
+            <img
+              src="images/team/social.jpg"
+              alt="Enigma Social Media Lead"
+              loading="lazy"
+            >
+
+            <span class="operative-id">OP_108</span>
+          </div>
+
+          <div class="team-info">
+
+            <div>
+              <p class="team-role">SOCIAL MEDIA LEAD</p>
+              <h3>SWORAJ KHADKA</h3>
+            </div>
+
+            <span class="team-arrow">↗</span>
+
+          </div>
+
+          <p class="team-bio">
+            Crafting our digital presence and keeping the
+            community engaged one post at a time.
+          </p>
+
+        </article>
+
+
+      </div>
+
+    </section>
+
+
+    <!-- ==================== VISION ==================== -->
+
+    <section id="vision" class="section vision reveal">
+
+      <div class="section-header">
+
+        <div class="section-number">04</div>
+
+        <div>
+          <p class="section-label">SECTOR.VISION</p>
+          <h2>WHERE WE'RE <span>GOING.</span></h2>
+        </div>
+
+      </div>
+
+      <div class="vision-statement">
+
+        <span>OUR VISION</span>
+
+        <blockquote>
+          "CREATING A COMMUNITY
+          WHERE INNOVATION FLOURISHES."
+        </blockquote>
+
+      </div>
+
+
+      <div class="vision-grid">
+
+        <article>
+          <span>VALUE.ID: 01</span>
+          <h3>INNOVATION_FIRST</h3>
+          <p>
+            Embracing new ideas and pushing boundaries.
+          </p>
+        </article>
+
+        <article>
+          <span>VALUE.ID: 02</span>
+          <h3>CORE_COMMUNITY</h3>
+          <p>
+            Building an inclusive network of technical rebels.
+          </p>
+        </article>
+
+        <article>
+          <span>VALUE.ID: 03</span>
+          <h3>VERTICAL_GROWTH</h3>
+          <p>
+            Constant evolution and technical mastery.
+          </p>
+        </article>
+
+      </div>
+
+    </section>
+
+
+    <!-- ==================== CONTACT ==================== -->
+
+    <section id="contact" class="section contact reveal">
+
+      <div class="section-header">
+
+        <div class="section-number">05</div>
+
+        <div>
+          <p class="section-label">SECURE UPLINK</p>
+          <h2>ESTABLISH <span>CONNECTION.</span></h2>
+        </div>
+
+      </div>
+
+      <div class="contact-layout">
+
+
+        <div class="contact-copy">
+
+          <p class="large-text">
+            Have a technical inquiry?
+            Want to collaborate?
+            <span>Open a channel.</span>
+          </p>
+
+          <div class="contact-details">
+
+            <div>
+              <span>UPLINK.EMAIL</span>
+              <a href="mailto:enigmaclub5@gmail.com">
+                enigmaclub5@gmail.com
+              </a>
+            </div>
+
+            <div>
+              <span>COMMS.DIRECT</span>
+              <a href="tel:+919696724664">
+                +91 96967 24664
+              </a>
+            </div>
+
+            <div>
+              <span>BASE.LOC</span>
+              <p>JCVR+27P, Karnataka 562112</p>
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <form id="contact-form" class="contact-form">
+
+          <div class="form-top">
+            <span>SECURE_CHANNEL_01</span>
+            <span>ENCRYPTED</span>
+          </div>
+
+          <label for="name">IDENTIFIER</label>
+
+          <input
+            type="text"
+            id="name"
+            placeholder="Your name"
+            autocomplete="name"
+            required
+          >
+
+
+          <label for="email">RETURN_ADDRESS</label>
+
+          <input
+            type="email"
+            id="email"
+            placeholder="Your email"
+            autocomplete="email"
+            required
+          >
+
+
+          <label for="message">TRANSMISSION</label>
+
+          <textarea
+            id="message"
+            rows="5"
+            placeholder="Your message"
+            required
+          ></textarea>
+
+
+          <button type="submit" class="btn primary">
+            Establish Uplink
+            <span>↗</span>
+          </button>
+
+          <p id="form-status" class="status"></p>
+
+        </form>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- ==================== FOOTER ==================== -->
 
   <footer>
-    <p>&copy; 2026 Enigma Club. All rights reserved.</p>
+
+    <div class="footer-main">
+
+      <div class="footer-brand">
+        <span>ENIGMA<span class="accent">//</span></span>
+        <p>
+          Student-led collective dedicated to technical
+          rebellion and innovative deployment.
+        </p>
+      </div>
+
+      <div class="footer-system">
+
+        <span>ENIGMA_SECURITY_PROTOCOL</span>
+        <strong>ENCRYPTED</strong>
+
+        <span>ESTABLISHED: 2025 // UPDATED: 2026</span>
+
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+
+      <span>© 2026 ENIGMA</span>
+
+      <span>SECTOR.ALPHA // END OF TRANSMISSION</span>
+
+    </div>
+
   </footer>
 
+
   <script src="script.js"></script>
+
 </body>
 </html>
